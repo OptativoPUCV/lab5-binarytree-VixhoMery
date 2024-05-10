@@ -183,25 +183,40 @@ Pair * firstTreeMap(TreeMap * tree) {
     return NULL;
 }
 
-Pair * nextTreeMap(TreeMap * tree) 
-{
-  TreeNode *key = tree->current;
-  if (key->right != NULL)
-  {
-    tree->current = minimum(key->right);
-    return tree->current->pair;
-  }
-    
-  else
-  {
-    key = tree->current;
-    while(key->parent != NULL && key->parent->right == key)
-      {
+Pair *nextTreeMap(TreeMap *tree) {
+    if (tree == NULL || tree->current == NULL) 
+    {
+        return NULL; // Verifica la validez de los parámetros y el nodo actual
+    }
+
+    TreeNode *key = tree->current;
+
+    // Caso 1: Si el nodo actual tiene un hijo derecho
+    if (key->right != NULL) 
+    {
+        // Encuentra el nodo más a la izquierda del subárbol derecho (mínimo)
+        tree->current = minimum(key->right);
+        if (tree->current != NULL) 
+        {
+            return tree->current->pair; // Retorna el par asociado al nodo mínimo encontrado
+        }
+        return NULL; // Si no se encontró ningún nodo mínimo, retorna NULL
+    }
+
+    // Caso 2: Si el nodo actual no tiene hijo derecho
+    // Retrocede por los ancestros hasta encontrar el primer ancestro izquierdo
+    while (key->parent != NULL && key->parent->right == key) {
         key = key->parent;
-        
-      }
+    }
+
+    // Si se llegó al nodo raíz y no hay más nodos por visitar
+    if (key->parent == NULL) 
+    {
+        tree->current = NULL; // No hay más nodos en el árbol para visitar
+        return NULL;
+    }
+
+    // El próximo nodo en orden es el ancestro izquierdo encontrado
     tree->current = key->parent;
-    return tree->current->pair;
-  }
-  return NULL;
+    return tree->current->pair; // Retorna el par asociado al nodo ancestro izquierdo
 }
