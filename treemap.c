@@ -152,7 +152,6 @@ void removeNode(TreeMap * tree, TreeNode* node)
     while(temporal != NULL)
       {
         temporal = temporal->left;
-        if()
       }
     
   }
