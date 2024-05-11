@@ -200,7 +200,6 @@ void removeNode(TreeMap * tree, TreeNode* node)
               // El nodo es hijo derecho de su padre
               parent->right = NULL;
           }
-          freeTreeNode(aux); // Libera la memoria del nodo eliminado
       }
       // Caso 2: Nodo tiene un solo hijo
       else if (aux->left != NULL && aux->right == NULL) {
