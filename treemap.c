@@ -105,58 +105,63 @@ TreeNode * minimum(TreeNode * x)
 void removeNode(TreeMap * tree, TreeNode* node) 
 {
   TreeNode *aux = tree->root;
-  while(aux != NULL)
+  TreeNode *parent = NULL;
+
+  
+  while (aux != NULL) 
+  {
+    if (is_equal(tree, aux->pair->key, node->pair->key)) 
     {
-      if(is_equal(tree, aux->pair->key, node->pair->key))
-      {
-        break;
-      }
-      else if(tree->lower_than(node->pair->key, aux->pair->key))
-      {
+        break; 
+    } 
+    else if (tree->lower_than(node->pair->key, aux->pair->key))
+    {
+        parent = aux;
         aux = aux->left;
-      }
-      else if(tree->lower_than(aux->pair->key, node->pair->key))
-      {
-        aux = aux->right;
-      }
+    } 
+    else 
+    {
+      parent = aux;
+      aux = aux->right;
     }
+  }
 
   //Si es hoja
   if(aux->left == NULL && aux->right == NULL)
   {
-    if(aux->parent->left == aux)
+    if(parent->left == aux)
     {
-      aux->parent->left = NULL;
+      parent->left = NULL;
     }
-    else if(aux->parent->right == aux)
+    else if(parent->right == aux)
     {
-      aux->parent->right = NULL;
+      parent->right = NULL;
     }
   }
     
   //Si tiene un hijo
   else if((aux->left != NULL && aux->right == NULL) || (aux->left == NULL && aux->right != NULL))
   {
-    if(aux->parent->left == aux)
+    if(parent->left == aux)
     {
-      if (aux->left == NULL) { aux->parent->left = aux->right; } 
-      else { aux->parent->left = aux->left; }
+      if (aux->left == NULL) { parent->left = aux->right; } 
+      else { parent->left = aux->left; }
+      aux->left->parent = parent;
     }
     
-    if(aux->parent->right == aux)
+    if(parent->right == aux)
     {
-      if (aux->left == NULL) { aux->parent->right = aux->right; }
-      else { aux->parent->right = aux->left; }
+      if (aux->left == NULL) { parent->right = aux->right; }
+      else { parent->right = aux->left; }
+      aux->right->parent = parent;
     }
   }
     
   // //Si tiene dos hijos
   // else if(aux->left != NULL && aux->right != NULL)
   // {
-  //   TreeNode *min = minimum(aux->right);
-  //   aux->pair->key = min->pair->key;
-  //   aux->pair->value = min->pair->value;
-  //   removeNode(tree, min);
+  //   TreeNode *max = 
+
   // }
 }
 
