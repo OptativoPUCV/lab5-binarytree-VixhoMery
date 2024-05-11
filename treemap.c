@@ -146,15 +146,14 @@ void removeNode(TreeMap * tree, TreeNode* node)
     {
       if (aux->left == NULL) { parent->left = aux->right; } 
       else { parent->left = aux->left; }
-      aux->left->parent = parent;
     }
     
     if(parent->right == aux)
     {
       if (aux->left == NULL) { parent->right = aux->right; }
       else { parent->right = aux->left; }
-      aux->right->parent = parent;
     }
+    
   }
     
   // //Si tiene dos hijos
