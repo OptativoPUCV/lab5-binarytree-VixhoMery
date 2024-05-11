@@ -191,3 +191,19 @@ treemap.c:244:1: error: expected identifier or ‘(’ before ‘}’ token
 cc1: all warnings being treated as errors
 Compilation failed
 13b1dad
+Sat 11 May 2024 11:22:59 PM UTC: 
+ treemap.c | 2 --
+ 1 file changed, 2 deletions(-)
+In file included from test.c:4:
+treemap.c: In function ‘removeNode’:
+treemap.c:203:11: error: implicit declaration of function ‘freeTreeNode’; did you mean ‘createTreeNode’? [-Werror=implicit-function-declaration]
+  203 |           freeTreeNode(aux); // Libera la memoria del nodo eliminado
+      |           ^~~~~~~~~~~~
+      |           createTreeNode
+treemap.c: At top level:
+treemap.c:242:1: error: expected identifier or ‘(’ before ‘}’ token
+  242 | }
+      | ^
+cc1: all warnings being treated as errors
+Compilation failed
+a516bc8
