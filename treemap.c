@@ -150,14 +150,14 @@ void removeNode(TreeMap * tree, TreeNode* node)
     }
   }
     
-  //Si tiene dos hijos
-  else if(aux->left != NULL && aux->right != NULL)
-  {
-    TreeNode *min = minimum(aux->right);
-    aux->pair->key = min->pair->key;
-    aux->pair->value = min->pair->value;
-    removeNode(tree, min);
-  }
+  // //Si tiene dos hijos
+  // else if(aux->left != NULL && aux->right != NULL)
+  // {
+  //   TreeNode *min = minimum(aux->right);
+  //   aux->pair->key = min->pair->key;
+  //   aux->pair->value = min->pair->value;
+  //   removeNode(tree, min);
+  // }
 }
 
 void eraseTreeMap(TreeMap * tree, void* key)
