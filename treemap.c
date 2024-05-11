@@ -133,7 +133,8 @@ void removeNode(TreeMap * tree, TreeNode* node)
       aux->parent->right = NULL;
     }
   }
-
+    
+  //Si tiene un hijo
   else if((aux->left != NULL && aux->right == NULL) || (aux->left == NULL && aux->right != NULL))
   {
     if(aux->parent->left == aux)
@@ -145,20 +146,15 @@ void removeNode(TreeMap * tree, TreeNode* node)
       aux->parent->right = aux->left;
     }
   }
-
+    
+  //Si tiene dos hijos
   else if(aux->left != NULL && aux->right != NULL)
   {
-    TreeNode *temporal = aux;
-    while(temporal != NULL)
-      {
-        temporal = temporal->left;
-      }
-    aux->pair->key = temporal->pair->key;
-    aux->pair->value = temporal->pair->value;
-    
-    
+    TreeNode *min = minimum(aux->right);
+    aux->pair->key = min->pair->key;
+    aux->pair->value = min->pair->value;
+    removeNode(tree, min);
   }
-
 }
 
 void eraseTreeMap(TreeMap * tree, void* key)
