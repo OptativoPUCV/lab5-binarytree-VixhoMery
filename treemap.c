@@ -104,140 +104,64 @@ TreeNode * minimum(TreeNode * x)
 
 void removeNode(TreeMap * tree, TreeNode* node) 
 {
-  // TreeNode *aux = tree->root;
-  // TreeNode *parent = NULL;
+  TreeNode *aux = tree->root;
+  TreeNode *parent = NULL;
 
   
-  // while (aux != NULL) 
-  // {
-  //   if (is_equal(tree, aux->pair->key, node->pair->key)) 
-  //   {
-  //       break; 
-  //   } 
-  //   else if (tree->lower_than(node->pair->key, aux->pair->key))
-  //   {
-  //       parent = aux;
-  //       aux = aux->left;
-  //   } 
-  //   else 
-  //   {
-  //     parent = aux;
-  //     aux = aux->right;
-  //   }
-  // }
-
-  // //Si es hoja
-  // if(aux->left == NULL && aux->right == NULL)
-  // {
-  //   if(parent->left == aux)
-  //   {
-  //     parent->left = NULL;
-  //   }
-  //   else if(parent->right == aux)
-  //   {
-  //     parent->right = NULL;
-  //   }
-  // }
-    
-  // //Si tiene un hijo
-  // else if((aux->left != NULL && aux->right == NULL) || (aux->left == NULL && aux->right != NULL))
-  // {
-  //   if(parent->left == aux)
-  //   {
-  //     if (aux->left == NULL) { parent->left = aux->right; } 
-  //     else { parent->left = aux->left; }
-  //   }
-    
-  //   if(parent->right == aux)
-  //   {
-  //     if (aux->left == NULL) { parent->right = aux->right; }
-  //     else { parent->right = aux->left; }
-  //   }
-    
-  // }
-    
-  // // //Si tiene dos hijos
-  // // else if(aux->left != NULL && aux->right != NULL)
-  // // {
-  // //   TreeNode *max = 
-
-  // // }
-
-      if (tree == NULL || node == NULL || tree->root == NULL) {
-          return; // Verifica la validez de los parámetros y si el árbol está vacío
-      }
-
-      TreeNode *aux = tree->root;
-      TreeNode *parent = NULL;
-
-      // Busca el nodo a eliminar en el árbol
-      while (aux != NULL) {
-          if (is_equal(tree, aux->pair->key, node->pair->key)) {
-              break; // Nodo encontrado
-          } else if (tree->lower_than(node->pair->key, aux->pair->key)) {
-              parent = aux;
-              aux = aux->left;
-          } else {
-              parent = aux;
-              aux = aux->right;
-          }
-      }
-
-      // Si el nodo no fue encontrado en el árbol
-      if (aux == NULL) {
-          return; // Nodo no encontrado, termina la función
-      }
-
-      // Caso 1: Nodo es una hoja (no tiene hijos)
-      if (aux->left == NULL && aux->right == NULL) {
-          if (parent == NULL) {
-              // El nodo es la raíz del árbol
-              tree->root = NULL;
-          } else if (parent->left == aux) {
-              // El nodo es hijo izquierdo de su padre
-              parent->left = NULL;
-          } else {
-              // El nodo es hijo derecho de su padre
-              parent->right = NULL;
-          }
-      }
-      // Caso 2: Nodo tiene un solo hijo
-      else if (aux->left != NULL && aux->right == NULL) {
-          if (parent == NULL) {
-              // El nodo es la raíz del árbol
-              tree->root = aux->left;
-          } else if (parent->left == aux) {
-              // El nodo es hijo izquierdo de su padre
-              parent->left = aux->left;
-          } else {
-              // El nodo es hijo derecho de su padre
-              parent->right = aux->left;
-          }
-          if (aux->left != NULL) {
-              aux->left->parent = parent; // Actualiza el padre del hijo
-          }
-      } else if (aux->left == NULL && aux->right != NULL) {
-          if (parent == NULL) {
-              // El nodo es la raíz del árbol
-              tree->root = aux->right;
-          } else if (parent->left == aux) {
-              // El nodo es hijo izquierdo de su padre
-              parent->left = aux->right;
-          } else {
-              // El nodo es hijo derecho de su padre
-              parent->right = aux->right;
-          }
-          if (aux->right != NULL) {
-              aux->right->parent = parent; // Actualiza el padre del hijo
-          }
-      }
-      // Caso 3: Nodo tiene dos hijos
-      else {
-          TreeNode *successor = minimum(aux->right); // Encuentra el sucesor del nodo a eliminar
-          aux->pair = successor->pair; // Copia el par del sucesor al nodo actual
-          removeNode(tree, successor); // Elimina el sucesor recursivamente
-      }
+  while (aux != NULL) 
+  {
+    if (is_equal(tree, aux->pair->key, node->pair->key)) 
+    {
+        break; 
+    } 
+    else if (tree->lower_than(node->pair->key, aux->pair->key))
+    {
+        parent = aux;
+        aux = aux->left;
+    } 
+    else 
+    {
+      parent = aux;
+      aux = aux->right;
+    }
   }
+
+  //Si es hoja
+  if(aux->left == NULL && aux->right == NULL)
+  {
+    if(parent->left == aux)
+    {
+      parent->left = NULL;
+    }
+    else if(parent->right == aux)
+    {
+      parent->right = NULL;
+    }
+  }
+    
+  //Si tiene un hijo
+  else if((aux->left != NULL && aux->right == NULL) || (aux->left == NULL && aux->right != NULL))
+  {
+    if(parent->left == aux)
+    {
+      if (aux->left == NULL) { parent->left = aux->right; } 
+      else { parent->left = aux->left; }
+    }
+    
+    if(parent->right == aux)
+    {
+      if (aux->left == NULL) { parent->right = aux->right; }
+      else { parent->right = aux->left; }
+    }
+    
+  }
+    
+  // //Si tiene dos hijos
+  // else if(aux->left != NULL && aux->right != NULL)
+  // {
+  //   TreeNode *max = 
+
+  // }
 }
 
 void eraseTreeMap(TreeMap * tree, void* key)
