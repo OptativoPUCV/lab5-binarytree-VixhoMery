@@ -165,6 +165,8 @@ void removeNode(TreeMap * tree, TreeNode* node)
       }
     }
   }
+
+  
  
 
 }
@@ -206,8 +208,24 @@ Pair * searchTreeMap(TreeMap * tree, void* key)
 }
 
 
-Pair * upperBound(TreeMap * tree, void* key) {
-    return NULL;
+Pair * upperBound(TreeMap * tree, void* key) 
+{
+  TreeNode *ub_node = NULL;
+  TreeNode *aux = tree->root;
+  while(aux != NULL)
+    {
+      if (aux->pair->key >= key)
+      {
+        ub_node = aux;
+      }
+
+      else if(aux->pair->key < key)
+      {
+        aux = aux->right;
+      }
+    }
+
+  return ub_node->pair;
 }
 
 Pair * firstTreeMap(TreeMap * tree) 
