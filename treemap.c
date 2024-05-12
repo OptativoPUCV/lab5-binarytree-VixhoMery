@@ -220,12 +220,11 @@ Pair * upperBound(TreeMap * tree, void* key)
         aux = aux->left;
       }
 
-      else if(aux->pair->key < key)
+      if(aux->pair->key < key)
       {
         aux = aux->right;
       }
     }
-
   return ub_node;
 }
 
