@@ -140,30 +140,36 @@ void removeNode(TreeMap * tree, TreeNode* node)
   }
     
   //Si tiene un hijo
-  else if(aux->left == NULL || aux->right == NULL)
+  if (node->left == NULL || node->right == NULL) 
   {
-    if(aux->left != NULL)
+    TreeNode *hijo = (node->left != NULL) ? node->left : node->right;
+    TreeNode *parent = node->parent; // Obtener el padre del nodo
+
+    if (parent == NULL) 
     {
-      if(parent->left == aux)
-      {
-        parent->left = aux->left;
-      }
-      else if(parent->right == aux)
-      {
-        parent->right = aux->left;
-      }
+        // El nodo es la raíz del árbol
+        tree->root = hijo;
+    } 
+        
+    else if (parent->left == node) 
+    {
+        // El nodo es hijo izquierdo de su padre
+        parent->left = hijo;
     }
+      
     else 
     {
-      if(parent->left == aux)
-      {
-        parent->left = aux->right;
-      }
-      else if(parent->right == aux)
-      {
-        parent->right = aux->right;
-      }
+        // El nodo es hijo derecho de su padre
+        parent->right = hijo;
     }
+
+    if (hijo != NULL) {
+        // Actualizar el puntero al padre del hijo
+          hijo->parent = parent;
+    }
+
+    tree->current = hijo; 
+    free(node); 
   }
 
   
