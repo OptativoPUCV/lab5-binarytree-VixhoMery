@@ -173,10 +173,10 @@ void removeNode(TreeMap * tree, TreeNode* node)
   }
   
   //Dos hijos
-  // TreeNode *min = minimum(node->right);
-  // node->pair->key = min->pair->key;
-  // node->pair->value = min->pair->value;
-  // removeNode(tree, min);
+  TreeNode *min = minimum(node->right);
+  node->pair->key = min->pair->key;
+  node->pair->value = min->pair->value;
+  removeNode(tree, min);
 }
 
 void eraseTreeMap(TreeMap * tree, void* key)
