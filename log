@@ -285,3 +285,9 @@ treemap.c:245:12: error: returning ‘TreeNode *’ from a function with incompa
 cc1: all warnings being treated as errors
 Compilation failed
 05fbc0b
+Sun 12 May 2024 02:35:12 AM UTC: 
+ treemap.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ tests:  22|3
+total_score: 50/70
+30e215c
