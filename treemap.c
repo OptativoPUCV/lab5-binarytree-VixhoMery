@@ -247,10 +247,17 @@ Pair * upperBound(TreeMap * tree, void* key)
   return NULL;
 }
 
+
+
 Pair * firstTreeMap(TreeMap * tree) 
 {
-  
-    return NULL;
+  TreeNode *nodo = tree->root;
+  while(nodo->left != NULL)
+  {
+    nodo = nodo->left;
+  }
+  tree->current = nodo;
+  return nodo->pair;
 }
 
 Pair *nextTreeMap(TreeMap *tree) {
